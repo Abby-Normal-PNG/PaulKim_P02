@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DeckTester : MonoBehaviour
 {
+    [SerializeField] List<AbilityCardData> _abilityDeckConfig = new List<AbilityCardData>();
+    [SerializeField] AbilityCardView _abilityCardView = null;
+
     Deck<AbilityCard> _abilityDeck = new Deck<AbilityCard>();
     Deck<AbilityCard> _abilityDiscard = new Deck<AbilityCard>();
 
@@ -17,14 +21,11 @@ public class DeckTester : MonoBehaviour
     {
         Debug.Log("Creating Ability Cards...");
 
-        AbilityCard cardA = new AbilityCard("Kick");
-        _abilityDeck.Add(cardA);
-        AbilityCard cardB = new AbilityCard("Charge");
-        _abilityDeck.Add(cardB);
-        AbilityCard cardC = new AbilityCard("Shout");
-        _abilityDeck.Add(cardC);
-        AbilityCard cardD = new AbilityCard("Slash");
-        _abilityDeck.Add(cardD);
+        foreach(AbilityCardData abilityData in _abilityDeckConfig)
+        {
+            AbilityCard newAbilityCard = new AbilityCard(abilityData);
+            _abilityDeck.Add(newAbilityCard);
+        }
 
         _abilityDeck.Shuffle();
     }
@@ -52,6 +53,7 @@ public class DeckTester : MonoBehaviour
         {
             Debug.Log("Drew card: " + newCard.Name);
             _playerHand.Add(newCard, DeckPosition.Top);
+            _abilityCardView.Display(newCard);
         }
     }
 

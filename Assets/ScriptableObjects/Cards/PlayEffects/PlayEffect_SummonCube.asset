@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a87d8edb94fb1494a96c194a75fc4431, type: 3}
+  m_Name: PlayEffect_SummonCube
+  m_EditorClassIdentifier: 
+  _prefabToSpawn: {fileID: 6960656513516739725, guid: b30e8bcd04464bc4a97f88c7d8b88ebc, type: 3}
