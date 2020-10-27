@@ -1,17 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class AbilityCard : Card
+public class ConvoCard : Card
 {
-    public int Cost { get; private set; }
-    public new Sprite Graphic { get; private set; }
-    public CardPlayEffect PlayEffect { get; private set; }
-    public new string Description { get; private set; }
-    public new Color Color { get; private set; }
+    public new Sprite Graphic;
+    public CardPlayEffect PlayEffect;
+    public new string Description;
+    public new Color Color;
 
-    public AbilityCard(AbilityCardData Data)
+    public ConvoCard(ConvoCardData Data)
     {
         Name = Data.Name;
-        Cost = Data.Cost;
         Graphic = Data.Graphic;
         PlayEffect = Data.PlayEffect;
         Description = Data.Description;

@@ -6,6 +6,7 @@ using System;
 public class Deck<T> where T : Card
 {
     List<T> _cards = new List<T>();
+    public List<T> Cards => _cards;
 
     public event Action Emptied = delegate { };
     public event Action<T> CardAdded = delegate { };
@@ -87,8 +88,8 @@ public class Deck<T> where T : Card
     {
         if (IsEmpty)
         {
-            Debug.LogWarning("Deck: Cannot draw new item - deck is empty!");
-            return default;
+            //Debug.LogWarning("Deck: Cannot draw new item - deck is empty!");
+            return null;
         }
 
         int targetIndex = GetIndexFromPosition(position);
