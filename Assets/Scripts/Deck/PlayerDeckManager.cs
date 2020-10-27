@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerDeckManager : MonoBehaviour
 {
+    [SerializeField] InputController _inputC;
+    public InputController InputC => _inputC;
+
     [SerializeField] ConvoDeck _convoDeck = null;
     [SerializeField] CardView _currentCardView = null;
 

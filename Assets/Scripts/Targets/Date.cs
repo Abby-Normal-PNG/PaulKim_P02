@@ -15,12 +15,12 @@ public class Date : MonoBehaviour, ITargetable, ILoveable
 
     private void Start()
     {
-        Debug.Log("Date Name: " + _name);
-        Debug.Log("Date Gender: " + _gender);
+        //Debug.Log("Date Name: " + _name);
+        //Debug.Log("Date Gender: " + _gender);
     }
     public void Target()
     {
-        Debug.Log(_name + " has been targeted.");
+        //Debug.Log(_name + " has been targeted.");
     }
     public void DecreaseJoy(int amount)
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewSpawnPlayEffect", menuName = "CardData/PlayEffects/Spawn")]
+[CreateAssetMenu(fileName = "NewSpawnPlayEffect", menuName = "PlayEffects/Spawn")]
 public class SpawnPlayEffect : CardPlayEffect
 {
     [SerializeField] GameObject _prefabToSpawn = null;

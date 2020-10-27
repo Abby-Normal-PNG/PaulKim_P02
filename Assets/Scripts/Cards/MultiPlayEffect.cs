@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewMultiPlayEffect", menuName = "CardData/PlayEffects/Multi")]
+[CreateAssetMenu(fileName = "NewMultiPlayEffect", menuName = "PlayEffects/Multi")]
 public class MultiPlayEffect : CardPlayEffect
 {
     [SerializeField] List<CardPlayEffect> _effects = new List<CardPlayEffect>();

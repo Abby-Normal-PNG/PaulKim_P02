@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewDamagePlayEffect", menuName = "CardData/PlayEffects/Damage")]
+[CreateAssetMenu(fileName = "NewDamagePlayEffect", menuName = "PlayEffects/Damage")]
 public class DamagePlayEffect : CardPlayEffect
 {
     [SerializeField] int _damageAmount = 1;

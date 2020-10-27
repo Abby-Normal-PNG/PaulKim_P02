@@ -14,7 +14,7 @@ public class TargetController : MonoBehaviour
         ITargetable possibleTarget = _objectToTarget.GetComponent<ITargetable>();
         if (possibleTarget != null)
         {
-            Debug.Log("New Target Acquired!");
+            //Debug.Log("New Target Acquired!");
             CurrentTarget = possibleTarget;
             _objectToTarget.Target();
         }
