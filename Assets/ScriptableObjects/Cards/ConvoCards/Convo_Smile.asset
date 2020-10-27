@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Convo_Smile
   m_EditorClassIdentifier: 
   _name: Smile
-  _graphic: {fileID: 0}
+  _graphic: {fileID: 21300000, guid: 5e3d23dd8dcab1149b62ebc71db49c1a, type: 3}
   _color: {r: 0.8235294, g: 0.58431375, b: 0.8392157, a: 1}
   _playEffect: {fileID: 11400000, guid: cf05d887c0acd304ca3831e02a4c0112, type: 2}
   _description: Raise 5 Joy

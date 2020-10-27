@@ -13,9 +13,14 @@ public class Date : MonoBehaviour, ITargetable, ILoveable
     [SerializeField] int _love = 50;
     [SerializeField] int _patience = 50;
 
+    private void Start()
+    {
+        Debug.Log("Date Name: " + _name);
+        Debug.Log("Date Gender: " + _gender);
+    }
     public void Target()
     {
-        Debug.Log("Date has been targeted.");
+        Debug.Log(_name + " has been targeted.");
     }
     public void DecreaseJoy(int amount)
     {
@@ -68,6 +73,30 @@ public class Date : MonoBehaviour, ITargetable, ILoveable
         if(stat < 0)
         {
             stat = 0;
+        }
+    }
+
+    public bool CheckGender(Gender genderToCheck)
+    {
+        if(genderToCheck == _gender)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool CheckFirstInitial(string initial)
+    {
+        if (_name.StartsWith(initial))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

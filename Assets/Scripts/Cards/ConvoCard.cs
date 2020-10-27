@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class ConvoCard : Card
 {
-    public new Sprite Graphic;
     public CardPlayEffect PlayEffect;
-    public new string Description;
-    public new Color Color;
 
     public ConvoCard(ConvoCardData Data)
     {

@@ -3,10 +3,7 @@
 public class AbilityCard : Card
 {
     public int Cost { get; private set; }
-    public new Sprite Graphic { get; private set; }
     public CardPlayEffect PlayEffect { get; private set; }
-    public new string Description { get; private set; }
-    public new Color Color { get; private set; }
 
     public AbilityCard(AbilityCardData Data)
     {

@@ -157,4 +157,9 @@ public class Deck<T> where T : Card
             _cards[currentIndex] = randomCard;
         }
     }
+
+    public void Clear()
+    {
+        _cards = new List<T>();
+    }
 }

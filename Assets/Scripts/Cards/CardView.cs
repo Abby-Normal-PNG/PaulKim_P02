@@ -15,9 +15,13 @@ public class CardView : MonoBehaviour
     {
         _cardCG.alpha = 1;
         _nameText.text = card.Name;
+        //Debug.Log("Card Name: " + card.Name);
         _graphicUI.sprite = card.Graphic;
+        //Debug.Log("Card Graphic: " + card.Graphic.name);
         _descriptionText.text = card.Description;
+        //Debug.Log("Card Description: " + card.Description);
         _bgColor = card.Color;
+        //Debug.Log("Card Color: " + card.Color);
         _bgImage.color = _bgColor;
     }
 

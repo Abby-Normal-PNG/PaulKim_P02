@@ -73,12 +73,10 @@ public class PlayerDeckManager : MonoBehaviour
         else
         {
             Debug.Log("Shuffling discard into deck...");
-            for(int i = 0; i < _discardDeck.Count; i++)
-            {
-                Card cardToShuffle = _discardDeck.Draw();
-                _drawDeck.Add(cardToShuffle);
-            }
+            _drawDeck.Add(_discardDeck.Cards);
             _drawDeck.Shuffle();
+            _discardDeck.Clear();
+            _drawDeckView.Display(_drawDeck);
             _discardDeckView.DisplayNull();
         }
     }
@@ -103,14 +101,16 @@ public class PlayerDeckManager : MonoBehaviour
             _discardDeckView.Display(targetCard);
             Debug.Log("Card added to discard: " + targetCard.Name);
 
-            _currentCardIndex -= 1;
+            
             if(_playerHand.Count > 0)
             {
-                _currentCardView.Display(_playerHand.Cards[_currentCardIndex]);
+                _currentCardView.Display(_playerHand.TopItem);
+                _currentCardIndex = _playerHand.Count - 1;
             }
             else
             {
                 _currentCardView.DisplayNull();
+                _currentCardIndex = 0;
             }
         }
         else
@@ -141,7 +141,7 @@ public class PlayerDeckManager : MonoBehaviour
     {
         if(_playerHand.Count > 0)
         {
-            if (_playerHand.Cards[_currentCardIndex + 1] != null)
+            if (_currentCardIndex + 1 <= _playerHand.Count - 1)
             {
                 //If there's a next card to go to
                 _currentCardIndex += 1;
@@ -164,7 +164,7 @@ public class PlayerDeckManager : MonoBehaviour
     {
         if (_playerHand.Count > 0)
         {
-            if (_playerHand.Cards[_currentCardIndex - 1] != null)
+            if (_currentCardIndex - 1 >= 0)
             {
                 //If there's a previous card to go to
                 _currentCardIndex += 1;
