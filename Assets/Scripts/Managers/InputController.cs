@@ -5,53 +5,36 @@ using System;
 
 public class InputController : MonoBehaviour
 {
-    public event Action PressedConfirm = delegate { };
-    public event Action PressedCancel = delegate { };
+    public event Action PlayerTurnEnd = delegate { };
+    public event Action PressedPlayCard = delegate { };
+    public event Action PressedDraw = delegate { };
     public event Action PressedLeft = delegate { };
     public event Action PressedRight = delegate { };
 
-    [SerializeField] KeyCode _confirmKey = KeyCode.Space;
-    [SerializeField] KeyCode _cancelKey = KeyCode.Escape;
-    [SerializeField] KeyCode _leftKey = KeyCode.A;
-    [SerializeField] KeyCode _rightKey = KeyCode.D;
 
-    private void Update()
+
+    public void EndPlayerTurn()
     {
-        DetectConfirm();
-        DetectCancel();
-        DetectLeft();
-        DetectRight();
+        PlayerTurnEnd?.Invoke();
     }
 
-    private void DetectConfirm()
+    public void PlayerPlayCard()
     {
-        if (Input.GetKeyDown(_confirmKey))
-        {
-            PressedConfirm?.Invoke();
-        }
+        PressedPlayCard?.Invoke();
     }
 
-    private void DetectCancel()
+    public void PlayerDrawCard()
     {
-        if (Input.GetKeyDown(_cancelKey))
-        {
-            PressedCancel?.Invoke();
-        }
+        PressedDraw?.Invoke();
     }
 
-    private void DetectLeft()
+    public void LeftButtonPressed()
     {
-        if (Input.GetKeyDown(_leftKey))
-        {
-            PressedLeft?.Invoke();
-        }
+        PressedLeft?.Invoke();
     }
 
-    private void DetectRight()
+    public void RightButtonPressed()
     {
-        if (Input.GetKeyDown(_rightKey))
-        {
-            PressedRight?.Invoke();
-        }
+        PressedRight?.Invoke();
     }
 }

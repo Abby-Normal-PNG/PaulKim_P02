@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerDeckManager : MonoBehaviour
 {
@@ -20,9 +21,13 @@ public class PlayerDeckManager : MonoBehaviour
 
     [SerializeField] int _currentCardIndex = 0;
 
+    [SerializeField] int _startHandSize = 3;
+    [HideInInspector] public bool _canDraw = false;
+
     private void Start()
     {
         SetupAbilityDeck();
+        DrawStartingHand();
     }
 
     private void SetupAbilityDeck()
@@ -41,19 +46,63 @@ public class PlayerDeckManager : MonoBehaviour
         _currentCardView.DisplayNull();
     }
 
-    private void Update()
+    private void DrawStartingHand()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        for(int i = 0; i < _startHandSize; i++)
         {
             DrawCard();
         }
+    }
+
+    private void OnEnable()
+    {
+        _inputC.PressedLeft += OnPressedLeft;
+        _inputC.PressedRight += OnPressedRight;
+        _inputC.PressedDraw += OnPressedDraw;
+        _inputC.PressedPlayCard += OnPressedPlay;
+    }
+
+    private void OnDisable()
+    {
+        _inputC.PressedLeft -= OnPressedLeft;
+        _inputC.PressedRight -= OnPressedRight;
+        _inputC.PressedDraw -= OnPressedDraw;
+        _inputC.PressedPlayCard -= OnPressedPlay;
+    }
+
+    private void OnPressedPlay()
+    {
+        PlayCurrentCard();
+    }
+
+    private void OnPressedDraw()
+    {
+        if (_canDraw)
+        {
+            DrawCard();
+            _canDraw = false;
+        }
+        else
+        {
+            Debug.LogWarning("Already drew this turn!");
+        }
+    }
+
+    private void OnPressedRight()
+    {
+        SelectNextCard();
+    }
+
+    private void OnPressedLeft()
+    {
+        SelectPrevCard();
+    }
+
+    private void Update()
+    {
         if (Input.GetKeyDown(KeyCode.W))
         {
             PrintPlayerHand();
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayCurrentCard();
         }
         if(_playerHand.Count == 0)
         {
