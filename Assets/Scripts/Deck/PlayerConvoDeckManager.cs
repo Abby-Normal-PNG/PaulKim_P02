@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerDeckManager : MonoBehaviour
+public class PlayerConvoDeckManager : MonoBehaviour
 {
     [SerializeField] InputController _inputC;
     public InputController InputC => _inputC;

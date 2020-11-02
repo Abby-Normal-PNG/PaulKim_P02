@@ -5,32 +5,74 @@ using UnityEngine.UI;
 
 public class CardGameUIController : MonoBehaviour
 {
-    [SerializeField] Text _enemyThinkingTextUI = null;
+    [SerializeField] Text _dateThinkingTextUI = null;
+    [SerializeField] Date _date = null;
+    [SerializeField] Slider _dateJoySlider = null;
+    [SerializeField] Slider _dateLoveSlider = null;
+    [SerializeField] Slider _datePatienceSlider = null;
 
     private void OnEnable()
     {
-        EnemyTurnCardGameState.EnemyTurnBegan += OnEnemyTurnBegan;
-        EnemyTurnCardGameState.EnemyTurnEnded += OnEnemyTurnEnded;
+        DateTurnCardGameState.DateTurnBegan += OnEnemyTurnBegan;
+        DateTurnCardGameState.DateTurnEnded += OnEnemyTurnEnded;
+        Date.JoyChanged += UpdateJoySlider;
+        Date.LoveChanged += UpdateLoveSlider;
+        Date.PatienceChanged += UpdatePatienceSlider;
     }
 
-    private void OnDisble()
+    private void OnDisable()
     {
-        EnemyTurnCardGameState.EnemyTurnBegan -= OnEnemyTurnBegan;
-        EnemyTurnCardGameState.EnemyTurnEnded -= OnEnemyTurnEnded;
+        DateTurnCardGameState.DateTurnBegan -= OnEnemyTurnBegan;
+        DateTurnCardGameState.DateTurnEnded -= OnEnemyTurnEnded;
+        Date.JoyChanged -= UpdateJoySlider;
+        Date.LoveChanged -= UpdateLoveSlider;
+        Date.PatienceChanged -= UpdatePatienceSlider;
     }
 
     void Start()
     {
-        _enemyThinkingTextUI.gameObject.SetActive(false);
+        _dateThinkingTextUI.gameObject.SetActive(false);
+        PrepareSliders();
     }
 
     void OnEnemyTurnBegan()
     {
-        _enemyThinkingTextUI.gameObject.SetActive(true);
+        _dateThinkingTextUI.gameObject.SetActive(true);
     }
 
     void OnEnemyTurnEnded()
     {
-        _enemyThinkingTextUI.gameObject.SetActive(false);
+        _dateThinkingTextUI.gameObject.SetActive(false);
+    }
+
+    void UpdateJoySlider()
+    {
+        _dateJoySlider.value = _date.Joy;
+    }
+
+    void UpdateLoveSlider()
+    {
+        _dateLoveSlider.value = _date.Love;
+    }
+
+    void UpdatePatienceSlider()
+    {
+        _datePatienceSlider.value = _date.Patience;
+    }
+
+    void PrepareSliders()
+    {
+        //Prep Joy Slider
+        _dateJoySlider.minValue = 0;
+        _dateJoySlider.maxValue = _date.StatCap;
+        _dateJoySlider.value = _date.Joy;
+        //Prep Love Slider
+        _dateLoveSlider.minValue = 0;
+        _dateLoveSlider.maxValue = _date.StatCap;
+        _dateLoveSlider.value = _date.Love;
+        //Prep PatienceSlider
+        _datePatienceSlider.minValue = 0;
+        _datePatienceSlider.maxValue = _date.StatCap;
+        _datePatienceSlider.value = _date.Patience;
     }
 }
