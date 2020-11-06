@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class PlayerConvoDeckManager : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] InputController _inputC;
     public InputController InputC => _inputC;
 
@@ -19,15 +21,22 @@ public class PlayerConvoDeckManager : MonoBehaviour
 
     Deck<Card> _playerHand = new Deck<Card>();
 
+    [SerializeField] CanvasGroup _playButtonCG = null;
+    [SerializeField] CanvasGroup _passTurnCG = null;
+    [SerializeField] CanvasGroup _drawButtonCG = null;
+    [SerializeField] Text _handSizeText = null;
+
+    [Header("Values")]
     [SerializeField] int _currentCardIndex = 0;
 
     [SerializeField] int _startHandSize = 3;
+    [SerializeField] int _handLimit = 7;
     [HideInInspector] public bool _canDraw = false;
 
     private void Start()
     {
         SetupAbilityDeck();
-        DrawStartingHand();
+        //DrawStartingHand();
     }
 
     private void SetupAbilityDeck()
@@ -46,12 +55,22 @@ public class PlayerConvoDeckManager : MonoBehaviour
         _currentCardView.DisplayNull();
     }
 
-    private void DrawStartingHand()
+    public void DrawStartingHand()
     {
+        if (_drawDeck.Count < _startHandSize)
+        {
+            Debug.Log("Shuffling discard into deck...");
+            _drawDeck.Add(_discardDeck.Cards);
+            _drawDeck.Shuffle();
+            _discardDeck.Clear();
+            _drawDeckView.Display(_drawDeck);
+            _discardDeckView.DisplayNull();
+        }
         for(int i = 0; i < _startHandSize; i++)
         {
             DrawCard();
         }
+        CheckPassPlayState();
     }
 
     private void OnEnable()
@@ -60,6 +79,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
         _inputC.PressedRight += OnPressedRight;
         _inputC.PressedDraw += OnPressedDraw;
         _inputC.PressedPlayCard += OnPressedPlay;
+        _inputC.PressedDiscard += OnPressedDiscard;
     }
 
     private void OnDisable()
@@ -68,6 +88,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
         _inputC.PressedRight -= OnPressedRight;
         _inputC.PressedDraw -= OnPressedDraw;
         _inputC.PressedPlayCard -= OnPressedPlay;
+        _inputC.PressedDiscard += OnPressedDiscard;
     }
 
     private void OnPressedPlay()
@@ -77,14 +98,21 @@ public class PlayerConvoDeckManager : MonoBehaviour
 
     private void OnPressedDraw()
     {
-        if (_canDraw)
+        if(_playerHand.Count < _handLimit)
         {
-            DrawCard();
-            _canDraw = false;
+            if (_canDraw)
+            {
+                DrawCard();
+                _canDraw = false;
+            }
+            else
+            {
+                Debug.LogWarning("Already drew this turn!");
+            }
         }
         else
         {
-            Debug.LogWarning("Already drew this turn!");
+            Debug.LogWarning("Hand size too large, please discard a card!");
         }
     }
 
@@ -98,17 +126,27 @@ public class PlayerConvoDeckManager : MonoBehaviour
         SelectPrevCard();
     }
 
+    private void OnPressedDiscard()
+    {
+        if(_playerHand.Count > 0)
+        {
+            DiscardCurrentCard();
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
             PrintPlayerHand();
         }
-        if(_playerHand.Count == 0)
+        /*if(_playerHand.Count == 0)
         {
             //TODO Shift card display logic to Unity Events
             _currentCardView.DisplayNull();
-        }
+        }*/
+
+        
     }
 
     public void DrawCard()
@@ -121,6 +159,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
             _currentCardIndex = _playerHand.Count - 1;
             _currentCardView.Display(_playerHand.Cards[_currentCardIndex]);
             _drawDeckView.Display(_drawDeck);
+            _canDraw = false;
         }
         else
         {
@@ -130,7 +169,10 @@ public class PlayerConvoDeckManager : MonoBehaviour
             _discardDeck.Clear();
             _drawDeckView.Display(_drawDeck);
             _discardDeckView.DisplayNull();
+            _canDraw = true;
         }
+        CheckPassPlayState();
+        UpdateHandSize();
     }
 
     private void PrintPlayerHand()
@@ -148,11 +190,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
             Card targetCard = _playerHand.Cards[_currentCardIndex];
             targetCard.Play();
 
-            _playerHand.Remove(_currentCardIndex);
-            _discardDeck.Add(targetCard);
-            _discardDeckView.Display(targetCard);
-            Debug.Log("Card added to discard: " + targetCard.Name);
-
+            DiscardCurrentCard();
             
             if(_playerHand.Count > 0)
             {
@@ -169,6 +207,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
         {
             Debug.LogWarning("Player Hand: Nothing to play - hand is empty!");
         }
+        UpdateHandSize();
     }
 
    /* private void PlayTopCard()
@@ -210,6 +249,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
         {
             Debug.LogWarning("No cards to select between");
         }
+        UpdateHandSize();
     }
 
     public void SelectPrevCard()
@@ -233,5 +273,46 @@ public class PlayerConvoDeckManager : MonoBehaviour
         {
             Debug.LogWarning("No cards to select between");
         }
+        UpdateHandSize();
+    }
+
+    public void CheckPassPlayState()
+    {
+        if (_canDraw)
+        {
+            _playButtonCG.alpha = 0;
+            _passTurnCG.alpha = 0;
+            _drawButtonCG.alpha = 1;
+        }
+        else
+        {
+            _playButtonCG.alpha = 1;
+            _passTurnCG.alpha = 1;
+            _drawButtonCG.alpha = 0;
+        }
+    }
+
+    private void DiscardCurrentCard()
+    {
+        Card targetCard = _playerHand.Cards[_currentCardIndex];
+        _playerHand.Remove(_currentCardIndex);
+        _discardDeck.Add(targetCard);
+        _discardDeckView.Display(targetCard);
+        Debug.Log("Card added to discard: " + targetCard.Name);
+        Debug.Log("Player Hand Count: " + _playerHand.Count);
+        if(_playerHand.Count <= 0)
+        {
+            _currentCardView.DisplayNull();
+        }
+        else
+        {
+            SelectNextCard();
+        }
+        UpdateHandSize();
+    }
+
+    private void UpdateHandSize()
+    {
+        _handSizeText.text = _playerHand.Count.ToString();
     }
 }

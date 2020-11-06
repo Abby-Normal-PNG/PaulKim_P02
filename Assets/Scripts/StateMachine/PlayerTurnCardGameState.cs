@@ -23,10 +23,14 @@ public class PlayerTurnCardGameState : CardGameState
         _playerTurnCount++;
         _playerTurnTextUI.text = "Player Turn: " + _playerTurnCount.ToString();
         
-
+        if(_playerTurnCount == 1)
+        {
+            _playerDeck.DrawStartingHand();
+        }
 
         //Allow player to draw
         _playerDeck._canDraw = true;
+        _playerDeck.CheckPassPlayState();
 
         //hook into events
         StateMachine.Input.PlayerTurnEnd += OnPlayerTurnEnd;

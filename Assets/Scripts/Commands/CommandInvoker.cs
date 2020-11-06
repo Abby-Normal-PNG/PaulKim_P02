@@ -20,4 +20,12 @@ public class CommandInvoker
         }
         CommandHistory.Pop().Undo();
     }
+
+    public void UndoAll()
+    {
+        foreach(ICommand command in CommandHistory)
+        {
+            UndoCommand();
+        }
+    }
 }

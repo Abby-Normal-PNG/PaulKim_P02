@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     public event Action PressedDraw = delegate { };
     public event Action PressedLeft = delegate { };
     public event Action PressedRight = delegate { };
+    public event Action PressedDiscard = delegate { };
 
 
 
@@ -36,5 +37,10 @@ public class InputController : MonoBehaviour
     public void RightButtonPressed()
     {
         PressedRight?.Invoke();
+    }
+
+    public void PlayerDiscardCard()
+    {
+        PressedDiscard?.Invoke();
     }
 }
