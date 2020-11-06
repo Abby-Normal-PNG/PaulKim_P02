@@ -13,6 +13,8 @@ public class ConvoCard : Card
         PlayEffect = Data.PlayEffect;
         Description = Data.Description;
         Color = Data.Color;
+        CardType = Data.CardType;
+        CardTexture = Data.CardTexture;
     }
 
     public override void Play()

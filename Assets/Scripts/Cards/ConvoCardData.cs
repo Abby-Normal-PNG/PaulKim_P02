@@ -19,4 +19,10 @@ public class ConvoCardData : ScriptableObject
 
     [SerializeField] [TextArea] string _description = "...";
     public string Description => _description;
+
+    private CardType _cardType = CardType.Convo;
+    public CardType CardType => _cardType;
+
+    [SerializeField] Texture2D _cardTexture = null;
+    public Texture2D CardTexture => _cardTexture;
 }

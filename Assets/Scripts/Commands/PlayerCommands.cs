@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerCommands : MonoBehaviour
 {
     [SerializeField] BoardSpawner _boardSpawner;
+    [SerializeField] ConvoCardData _cardData;
+    private ConvoCard _card;
+    private BoardCardSpawner _boardCardSpawner = null;
 
     Camera _camera = null;
     RaycastHit _hitInfo;
@@ -15,6 +18,10 @@ public class PlayerCommands : MonoBehaviour
     {
         _camera = Camera.main;
     }
+    private void Start()
+    {
+        _card = new ConvoCard(_cardData);
+    }
 
     private void Update()
     {
@@ -22,7 +29,8 @@ public class PlayerCommands : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GetNewMouseHit();
-            SpawnToken();
+            AssignBoardCardSpawner();
+            SpawnBoardCard();
         }
         //Buff Command
         if (Input.GetMouseButtonDown(1))
@@ -45,6 +53,20 @@ public class PlayerCommands : MonoBehaviour
         {
             Debug.Log("Ray hit: " + _hitInfo.transform.name);
         }
+    }
+
+    void SpawnBoardCard()
+    {
+        if(_boardCardSpawner != null)
+        {
+            ICommand spawnBoardCardCommand = new SpawnBoardCardCommand(_boardCardSpawner, _card);
+            _commandInvoker.ExecuteCommand(spawnBoardCardCommand);
+        }
+    }
+
+    void AssignBoardCardSpawner()
+    {
+        _boardCardSpawner = _hitInfo.collider.gameObject.GetComponent<BoardCardSpawner>();
     }
 
     void SpawnToken()
