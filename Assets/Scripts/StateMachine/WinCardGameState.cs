@@ -9,6 +9,7 @@ public class WinCardGameState : CardGameState
 
     public override void Enter()
     {
+        Debug.Log("Win State: Entering...");
         _gameCanvas.gameObject.SetActive(false);
         _winCanvas.gameObject.SetActive(true);
     }

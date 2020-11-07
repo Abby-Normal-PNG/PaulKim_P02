@@ -381,10 +381,10 @@ RectTransform:
   m_Father: {fileID: 917742162}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 135.68472, y: -85.11879}
-  m_SizeDelta: {x: 271.36945, y: 34.047516}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &61939967
 MonoBehaviour:
@@ -988,10 +988,10 @@ RectTransform:
   m_Father: {fileID: 917742162}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 135.68472, y: -17.023758}
-  m_SizeDelta: {x: 271.36945, y: 34.047516}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267867603
 MonoBehaviour:
@@ -1320,7 +1320,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1549,10 +1549,10 @@ RectTransform:
   m_Father: {fileID: 917742162}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 135.68472, y: -51.071274}
-  m_SizeDelta: {x: 271.36945, y: 34.047516}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &499799782
 MonoBehaviour:
@@ -2678,8 +2678,13 @@ MonoBehaviour:
   _currentCardView: {fileID: 1045046750}
   _drawDeckView: {fileID: 710095574}
   _discardDeckView: {fileID: 760226902}
+  _playButtonCG: {fileID: 0}
+  _passTurnCG: {fileID: 0}
+  _drawButtonCG: {fileID: 0}
+  _handSizeText: {fileID: 0}
   _currentCardIndex: 0
   _startHandSize: 3
+  _handLimit: 7
   _canDraw: 0
 --- !u!1 &747490655
 GameObject:
@@ -4196,7 +4201,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4271,7 +4276,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4529,6 +4534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerTurnTextUI: {fileID: 1808695812}
   _playerDeck: {fileID: 745731259}
+  _turnCanvas: {fileID: 0}
 --- !u!114 &1558921210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5131,7 +5137,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5221,8 +5227,13 @@ MonoBehaviour:
   _currentCardView: {fileID: 1045046750}
   _drawDeckView: {fileID: 710095574}
   _discardDeckView: {fileID: 760226902}
+  _playButtonCG: {fileID: 0}
+  _passTurnCG: {fileID: 0}
+  _drawButtonCG: {fileID: 0}
+  _handSizeText: {fileID: 0}
   _currentCardIndex: 0
   _startHandSize: 3
+  _handLimit: 7
   _canDraw: 0
 --- !u!1 &1808695811
 GameObject:
@@ -5698,7 +5709,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5966,7 +5977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1954375033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6618,7 +6629,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

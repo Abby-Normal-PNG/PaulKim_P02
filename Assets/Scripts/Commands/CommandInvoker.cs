@@ -12,6 +12,13 @@ public class CommandInvoker
         command.Execute();
     }
 
+    public BoardCard ExecuteReturnBoardCard(SpawnBoardCardCommand command, Card card)
+    {
+        CommandHistory.Push(command);
+        BoardCard boardCardToReturn = command.Execute(card);
+        return boardCardToReturn;
+    }
+
     public void UndoCommand()
     {
         if(CommandHistory.Count <= 0)
@@ -23,9 +30,12 @@ public class CommandInvoker
 
     public void UndoAll()
     {
-        foreach(ICommand command in CommandHistory)
+        if(CommandHistory.Count > 0)
         {
-            UndoCommand();
+            foreach (ICommand command in CommandHistory)
+            {
+                UndoCommand();
+            }
         }
     }
 }

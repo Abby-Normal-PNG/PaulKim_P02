@@ -86,8 +86,6 @@ public class Date : MonoBehaviour, ITargetable, ILoveable
 
     private void CapStat(int value)
     {
-        CheckWin();
-        CheckLose();
         if(value > _statCap)
         {
             value = _statCap;
@@ -122,20 +120,5 @@ public class Date : MonoBehaviour, ITargetable, ILoveable
         }
     }
 
-    private void CheckWin()
-    {
-        if(Love >= StatCap)
-        {
-            _stateMachine.ChangeState<WinCardGameState>();
-        }
-    }
-
-    private void CheckLose()
-    {
-        //If any stat is below zero, game over
-        if(Love <= 0 || Joy <= 0 || Patience <= 0)
-        {
-            _stateMachine.ChangeState<LoseCardGameState>();
-        }
-    }
+    
 }

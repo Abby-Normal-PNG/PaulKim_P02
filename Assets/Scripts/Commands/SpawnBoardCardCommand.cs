@@ -20,6 +20,12 @@ public class SpawnBoardCardCommand : ICommand
         _spawnedBoardCard = _boardCardSpawner.SpawnBoardCard(_card);
     }
 
+    public BoardCard Execute(Card card)
+    {
+        _spawnedBoardCard = _boardCardSpawner.SpawnBoardCard(card);
+        return _spawnedBoardCard;
+    }
+
     public void Undo()
     {
         _boardCardSpawner.RemoveToken(_spawnedBoardCard);

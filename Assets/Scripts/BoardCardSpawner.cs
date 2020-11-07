@@ -9,13 +9,15 @@ public class BoardCardSpawner : MonoBehaviour
     public Transform SpawnPosition => _spawnPosition;
     [SerializeField] CardType _cardType = CardType.Generic;
 
+    public BoardCard _spawnedBoardCard;
+
     public BoardCard SpawnBoardCard(Card card)
     {
         if (CardTypesMatch(card.CardType))
         {
-            BoardCard newBoardCard = Instantiate(_boardCardPrefab, _spawnPosition.transform.position, _boardCardPrefab.transform.rotation);
-            newBoardCard.SetTexture(card);
-            return newBoardCard;
+            _spawnedBoardCard = Instantiate(_boardCardPrefab, _spawnPosition.transform.position, _spawnPosition.transform.rotation);
+            _spawnedBoardCard.SetTexture(card);
+            return _spawnedBoardCard;
         }
         else
         {
@@ -42,5 +44,13 @@ public class BoardCardSpawner : MonoBehaviour
     public void RemoveToken(BoardCard boardCardToRemove)
     {
         Destroy(boardCardToRemove.gameObject);
+    }
+
+    public void RemoveBoardCard()
+    {
+        if(_spawnedBoardCard != null)
+        {
+            Destroy(_spawnedBoardCard.gameObject);
+        }
     }
 }

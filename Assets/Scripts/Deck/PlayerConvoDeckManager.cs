@@ -33,6 +33,9 @@ public class PlayerConvoDeckManager : MonoBehaviour
     [SerializeField] int _handLimit = 7;
     [HideInInspector] public bool _canDraw = false;
 
+    private Card _cardToPlace = null;
+    public Card CardToPlace => _cardToPlace;
+
     private void Start()
     {
         SetupAbilityDeck();
@@ -103,7 +106,6 @@ public class PlayerConvoDeckManager : MonoBehaviour
             if (_canDraw)
             {
                 DrawCard();
-                _canDraw = false;
             }
             else
             {
@@ -188,11 +190,9 @@ public class PlayerConvoDeckManager : MonoBehaviour
         if (_playerHand.Count > 0)
         {
             Card targetCard = _playerHand.Cards[_currentCardIndex];
-            targetCard.Play();
-
-            DiscardCurrentCard();
+            _cardToPlace = targetCard;
             
-            if(_playerHand.Count > 0)
+            /*if(_playerHand.Count > 0)
             {
                 _currentCardView.Display(_playerHand.TopItem);
                 _currentCardIndex = _playerHand.Count - 1;
@@ -201,7 +201,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
             {
                 _currentCardView.DisplayNull();
                 _currentCardIndex = 0;
-            }
+            }*/
         }
         else
         {
@@ -259,7 +259,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
             if (_currentCardIndex - 1 >= 0)
             {
                 //If there's a previous card to go to
-                _currentCardIndex += 1;
+                _currentCardIndex -= 1;
                 _currentCardView.Display(_playerHand.Cards[_currentCardIndex]);
             }
             else
@@ -292,7 +292,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
         }
     }
 
-    private void DiscardCurrentCard()
+    public void DiscardCurrentCard()
     {
         Card targetCard = _playerHand.Cards[_currentCardIndex];
         _playerHand.Remove(_currentCardIndex);
@@ -300,19 +300,43 @@ public class PlayerConvoDeckManager : MonoBehaviour
         _discardDeckView.Display(targetCard);
         Debug.Log("Card added to discard: " + targetCard.Name);
         Debug.Log("Player Hand Count: " + _playerHand.Count);
-        if(_playerHand.Count <= 0)
+        if (_playerHand.Count > 0)
         {
-            _currentCardView.DisplayNull();
+            _currentCardView.Display(_playerHand.TopItem);
+            _currentCardIndex = _playerHand.Count - 1;
         }
         else
         {
-            SelectNextCard();
+            _currentCardView.DisplayNull();
+            _currentCardIndex = 0;
         }
         UpdateHandSize();
     }
 
     private void UpdateHandSize()
     {
-        _handSizeText.text = _playerHand.Count.ToString();
+        _handSizeText.text = _playerHand.Count.ToString() + "/" + _handLimit.ToString();
+        if(_playerHand.Count >= _handLimit)
+        {
+            _handSizeText.color = Color.red;
+        }
+        else
+        {
+            _handSizeText.color = Color.black;
+        }
+    }
+
+    public void UpdateHandVisuals()
+    {
+        if (_playerHand.Count > 0)
+        {
+            _currentCardView.Display(_playerHand.TopItem);
+            _currentCardIndex = _playerHand.Count - 1;
+        }
+        else
+        {
+            _currentCardView.DisplayNull();
+            _currentCardIndex = 0;
+        }
     }
 }
