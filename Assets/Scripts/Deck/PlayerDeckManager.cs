@@ -4,13 +4,14 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-public class PlayerConvoDeckManager : MonoBehaviour
+public class PlayerDeckManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] InputController _inputC;
     public InputController InputC => _inputC;
 
     [SerializeField] ConvoDeck _convoDeck = null;
+    [SerializeField] EnviroDeck _enviroDeck = null;
     [SerializeField] CardView _currentCardView = null;
 
     Deck<Card> _drawDeck = new Deck<Card>();
@@ -28,7 +29,7 @@ public class PlayerConvoDeckManager : MonoBehaviour
 
     [Header("Values")]
     [SerializeField] int _currentCardIndex = 0;
-
+    [SerializeField] int _shuffles = 3;
     [SerializeField] int _startHandSize = 3;
     [SerializeField] int _handLimit = 7;
     [HideInInspector] public bool _canDraw = false;
@@ -50,9 +51,18 @@ public class PlayerConvoDeckManager : MonoBehaviour
             ConvoCard newConvoCard = new ConvoCard(convoData);
             _drawDeck.Add(newConvoCard);
         }
+        Debug.Log("Creating EnviroCards...");
+        foreach (EnviroCardData enviroData in _enviroDeck.EnviroDeckConfig)
+        {
+            EnviroCard newEnviroCard = new EnviroCard(enviroData);
+            _drawDeck.Add(newEnviroCard);
+        }
 
         Debug.Log("Shuffling...");
-        _drawDeck.Shuffle();
+        for(int i = 0; i < _shuffles; i++)
+        {
+            _drawDeck.Shuffle();
+        }
         _drawDeckView.Display(_drawDeck);
         _discardDeckView.DisplayNull();
         _currentCardView.DisplayNull();

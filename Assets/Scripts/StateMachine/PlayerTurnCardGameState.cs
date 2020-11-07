@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class PlayerTurnCardGameState : CardGameState
 {
     [SerializeField] Text _playerTurnTextUI = null;
-    [SerializeField] PlayerConvoDeckManager _playerDeck = null;
+    [SerializeField] PlayerDeckManager _playerDeck = null;
     [SerializeField] CanvasGroup _turnCanvas = null;
     [SerializeField] BoardManager _board = null;
+    [SerializeField] Date _date = null;
 
     [SerializeField] static int _turnsPerRound = 5;
     public static int TurnsPerRound => _turnsPerRound;
@@ -30,6 +31,7 @@ public class PlayerTurnCardGameState : CardGameState
         
         if(_playerTurnCount == 1)
         {
+            _date.ResetMods();
             _board.ClearBoard();
             _playerDeck.DrawStartingHand();
         }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StatEffectType { IncJoy, IncLove, IncPatience, DecJoy, DecLove, DecPatience}
+public enum StatEffectType { IncJoy, IncLove, IncPatience, 
+                                DecJoy, DecLove, DecPatience}
 [CreateAssetMenu(fileName = "NewConvoPlayEffect", menuName = "PlayEffects/Convo")]
 public class ConvoPlayEffect : CardPlayEffect
 {

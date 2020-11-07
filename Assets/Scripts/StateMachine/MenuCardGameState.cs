@@ -5,6 +5,7 @@ using UnityEngine;
 public class MenuCardGameState : CardGameState
 {
     [SerializeField] Canvas _menuCanvas;
+    [SerializeField] Date _date;
 
     public override void Enter()
     {

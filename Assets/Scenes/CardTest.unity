@@ -1173,7 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0.49741793, b: 0.4835885, a: 1}
+  m_Color: {r: 0.64705884, g: 0.8392157, b: 0.58431375, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3868,7 +3868,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Card Name
+  m_Text: Crowded Space
 --- !u!222 &1054306472
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4535,6 +4535,8 @@ MonoBehaviour:
   _playerTurnTextUI: {fileID: 1808695812}
   _playerDeck: {fileID: 745731259}
   _turnCanvas: {fileID: 0}
+  _board: {fileID: 0}
+  _date: {fileID: 0}
 --- !u!114 &1558921210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4576,6 +4578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseDuration: 1.5
+  _date: {fileID: 0}
 --- !u!114 &1558921213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4589,6 +4592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuCanvas: {fileID: 477141625}
+  _date: {fileID: 0}
 --- !u!114 &1558921214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5020,7 +5024,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This Card Does Things
+  m_Text: Doubles effects on Patience
 --- !u!222 &1701111040
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6200,7 +6204,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cca11544daa1ecf4bad965bbbe538f79, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 87ac0aace55c15046a148a9955b57188, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6858,9 +6862,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Steve
   _gender: 0
-  _joy: 50
-  _love: 50
-  _patience: 50
+  _startJoy: 50
+  _joyMultiplier: 1
+  _joyBonus: 0
+  _startLove: 50
+  _loveMultiplier: 1
+  _loveBonus: 0
+  _startPatience: 50
+  _patienceMultiplier: 1
+  _patienceBonus: 0
   _statCap: 100
   _stateMachine: {fileID: 1558921211}
 --- !u!4 &2134600544

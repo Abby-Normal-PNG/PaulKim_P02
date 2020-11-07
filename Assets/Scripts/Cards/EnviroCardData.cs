@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewConvoCard", menuName = "CardData/ConvoCard")]
-public class ConvoCardData : ScriptableObject
+[CreateAssetMenu(fileName = "NewConvoCard", menuName = "CardData/EnviroCard")]
+public class EnviroCardData : ScriptableObject
 {
     [SerializeField] string _name = "...";
     public string Name => _name;
@@ -20,7 +20,7 @@ public class ConvoCardData : ScriptableObject
     [SerializeField] [TextArea] string _description = "...";
     public string Description => _description;
 
-    private CardType _cardType = CardType.Conversation;
+    private CardType _cardType = CardType.Environment;
     public CardType CardType => _cardType;
 
     [SerializeField] Texture2D _cardTexture = null;

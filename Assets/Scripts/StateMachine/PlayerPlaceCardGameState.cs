@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerPlaceCardGameState : CardGameState
 {
-    [SerializeField] PlayerConvoDeckManager _playerManager;
+    [SerializeField] PlayerDeckManager _playerManager;
     [SerializeField] Canvas _placeCardCanvas;
     private Card _card;
     private BoardCardSpawner _boardCardSpawner = null;

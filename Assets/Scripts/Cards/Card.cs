@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public enum CardType { Generic, Ability, Convo, Environment, Date }
+public enum CardType { Generic, Ability, Conversation, Environment, Date }
 public abstract class Card
 {
     public string Name { get; protected set; } = "...";

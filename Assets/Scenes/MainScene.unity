@@ -742,7 +742,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Title Here
+  m_Text: Dating Card Game
 --- !u!222 &142028252
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -910,9 +910,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Jessica
   _gender: 1
-  _joy: 50
-  _love: 50
-  _patience: 50
+  _startJoy: 50
+  _joyMultiplier: 1
+  _joyBonus: 0
+  _startLove: 50
+  _loveMultiplier: 1
+  _loveBonus: 0
+  _startPatience: 50
+  _patienceMultiplier: 1
+  _patienceBonus: 0
   _statCap: 100
   _stateMachine: {fileID: 1486993156}
 --- !u!4 &217188236
@@ -4255,7 +4261,7 @@ GameObject:
   - component: {fileID: 1028232001}
   - component: {fileID: 1028232000}
   m_Layer: 0
-  m_Name: PlayerConvoDeckManager
+  m_Name: PlayerDeckManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4270,11 +4276,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028231999}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c64ace4ba5dd5546a45284a1f401d93, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f6166dbb79da8f45b574a47ebc31754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _inputC: {fileID: 220835967}
   _convoDeck: {fileID: 11400000, guid: 35433d882dd767b479e4cb21dcb98ac3, type: 2}
+  _enviroDeck: {fileID: 11400000, guid: cd8a78b9a0a27374ba2e60c2cbb63f0c, type: 2}
   _currentCardView: {fileID: 1153540796}
   _drawDeckView: {fileID: 1231877500}
   _discardDeckView: {fileID: 136307098}
@@ -6236,6 +6243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuCanvas: {fileID: 93357309}
+  _date: {fileID: 217188235}
 --- !u!114 &1486993153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6266,6 +6274,7 @@ MonoBehaviour:
   _playerDeck: {fileID: 1028232000}
   _turnCanvas: {fileID: 1101586778}
   _board: {fileID: 143163707}
+  _date: {fileID: 217188235}
 --- !u!114 &1486993155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7450,7 +7459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0.49741793, b: 0.4835885, a: 1}
+  m_Color: {r: 0.4433962, g: 0.41244212, b: 0.41244212, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

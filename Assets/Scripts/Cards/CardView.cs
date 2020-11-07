@@ -35,6 +35,16 @@ public class CardView : MonoBehaviour
         _bgImage.color = _bgColor;
     }
 
+    public void Display(EnviroCard enviroCard)
+    {
+        _cardCG.alpha = 1;
+        _nameText.text = enviroCard.Name;
+        _graphicUI.sprite = enviroCard.Graphic;
+        _descriptionText.text = enviroCard.Description;
+        _bgColor = enviroCard.Color;
+        _bgImage.color = _bgColor;
+    }
+
     public void Display(AbilityCard abilityCard)
     {
         _nameText.text = abilityCard.Name;
