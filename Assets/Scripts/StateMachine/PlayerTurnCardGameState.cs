@@ -12,8 +12,8 @@ public class PlayerTurnCardGameState : CardGameState
     [SerializeField] BoardManager _board = null;
     [SerializeField] Date _date = null;
 
-    [SerializeField] static int _turnsPerRound = 5;
-    public static int TurnsPerRound => _turnsPerRound;
+    [SerializeField] int _turnsPerRound = 5;
+    public int TurnsPerRound => _turnsPerRound;
 
     static int _playerTurnCount = 0;
     public static int PlayerTurnCount => _playerTurnCount;

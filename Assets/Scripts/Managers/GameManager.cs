@@ -17,17 +17,27 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(_reloadKey))
         {
-            Scene _currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(_currentScene.name);
+            ReloadScene();
         }
+    }
+
+    public void ReloadScene()
+    {
+        Scene _currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(_currentScene.name);
     }
 
     private void CheckForQuit()
     {
         if (Input.GetKeyDown(_quitKey))
         {
-            Application.Quit();
+            QuitGame();
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
 }

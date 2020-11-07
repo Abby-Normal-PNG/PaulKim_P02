@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enviro_Wine
   m_EditorClassIdentifier: 
   _name: Fine Wine
-  _graphic: {fileID: 0}
+  _graphic: {fileID: 21300000, guid: 3887ec1e8d9be1d4fa95ebc4b17c0daa, type: 3}
   _color: {r: 0.64705884, g: 0.8392157, b: 0.58431375, a: 1}
   _playEffect: {fileID: 11400000, guid: 40fb9503bc9d3b64cb7bc378afcab09c, type: 2}
   _description: +3 Patience Bonus

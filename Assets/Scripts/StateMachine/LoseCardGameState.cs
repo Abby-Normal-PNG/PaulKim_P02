@@ -6,11 +6,13 @@ public class LoseCardGameState : CardGameState
 {
     [SerializeField] Canvas _loseCanvas = null;
     [SerializeField] Canvas _gameCanvas = null;
+    [SerializeField] CanvasGroup _persistantCG = null;
 
     public override void Enter()
     {
         _gameCanvas.gameObject.SetActive(false);
         _loseCanvas.gameObject.SetActive(true);
+        _persistantCG.alpha = 0;
     }
 
     public override void Exit()

@@ -6,12 +6,14 @@ public class WinCardGameState : CardGameState
 {
     [SerializeField] Canvas _winCanvas = null;
     [SerializeField] Canvas _gameCanvas = null;
+    [SerializeField] CanvasGroup _persistentCG;
 
     public override void Enter()
     {
         Debug.Log("Win State: Entering...");
         _gameCanvas.gameObject.SetActive(false);
         _winCanvas.gameObject.SetActive(true);
+        _persistentCG.alpha = 0;
     }
 
     public override void Exit()

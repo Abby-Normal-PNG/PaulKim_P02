@@ -10,6 +10,7 @@ public class DateTurnCardGameState : CardGameState
 
     [SerializeField] float _pauseDuration = 1.5f;
     [SerializeField] Date _date;
+    [SerializeField] PlayerTurnCardGameState _playerTurn = null;
 
     private Coroutine _coroutine;
 
@@ -31,9 +32,45 @@ public class DateTurnCardGameState : CardGameState
         Debug.Log("Checking Win/Loss State");
         Debug.Log("Date thinking...");
         yield return new WaitForSeconds(pauseDuration);
-
-        Debug.Log("Date performs action");
+        DateRandomAction();
         EndOfDateTurn();
+    }
+
+    private void DateRandomAction()
+    {
+        int randomInt = RandomHelper.RandomIntLessThan(6);
+        switch (randomInt)
+        {
+            case 0:
+                _date.IncreaseJoy(5);
+                Debug.Log("Date Joy +5");
+                break;
+
+            case 1:
+                _date.IncreaseLove(5);
+                Debug.Log("Date Love +5");
+                break;
+
+            case 2:
+                _date.IncreasePatience(5);
+                Debug.Log("Date Patience +5");
+                break;
+
+            case 3:
+                _date.DecreaseJoy(5);
+                Debug.Log("Date Joy -5");
+                break;
+
+            case 4:
+                _date.DecreaseLove(5);
+                Debug.Log("Date Love -5");
+                break;
+
+            case 5:
+                _date.DecreasePatience(5);
+                Debug.Log("Date Patience -5");
+                break;
+        }
     }
 
     private void EndOfDateTurn()
@@ -60,7 +97,7 @@ public class DateTurnCardGameState : CardGameState
     private bool CheckForRoundEnd()
     {
         Debug.Log("Checking turn count...");
-        if (PlayerTurnCardGameState.PlayerTurnCount >= PlayerTurnCardGameState.TurnsPerRound)
+        if (PlayerTurnCardGameState.PlayerTurnCount >= _playerTurn.TurnsPerRound)
         {
             Debug.LogWarning("Round over: Turn Limit Passed");
             PlayerTurnCardGameState.ResetTurnCount();

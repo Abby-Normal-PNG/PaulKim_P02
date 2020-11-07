@@ -275,7 +275,7 @@ public class PlayerDeckManager : MonoBehaviour
             else
             {
                 //else return to the end
-                _currentCardIndex = 0;
+                _currentCardIndex = _playerHand.Count - 1;
                 _currentCardView.Display(_playerHand.TopItem);
             }
         }
