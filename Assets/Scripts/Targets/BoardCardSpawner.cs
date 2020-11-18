@@ -11,12 +11,16 @@ public class BoardCardSpawner : MonoBehaviour
 
     public BoardCard _spawnedBoardCard;
 
+    private bool _spaceFilled = false;
+    public bool SpaceFilled => _spaceFilled;
+
     public BoardCard SpawnBoardCard(Card card)
     {
         if (CardTypesMatch(card.CardType))
         {
             _spawnedBoardCard = Instantiate(_boardCardPrefab, _spawnPosition.transform.position, _spawnPosition.transform.rotation);
             _spawnedBoardCard.SetTexture(card);
+            _spaceFilled = true;
             return _spawnedBoardCard;
         }
         else
@@ -25,7 +29,7 @@ public class BoardCardSpawner : MonoBehaviour
         }
     }
 
-    private bool CardTypesMatch(CardType typeToMatch)
+    public bool CardTypesMatch(CardType typeToMatch)
     {
         if(_cardType == CardType.Generic)
         {
@@ -51,6 +55,7 @@ public class BoardCardSpawner : MonoBehaviour
         if(_spawnedBoardCard != null)
         {
             Destroy(_spawnedBoardCard.gameObject);
+            _spaceFilled = false;
         }
     }
 }

@@ -7,6 +7,7 @@ public class CardGameUIController : MonoBehaviour
 {
     [SerializeField] Text _dateThinkingTextUI = null;
     [SerializeField] Date _date = null;
+    public Date Date => _date;
     [SerializeField] Slider _dateJoySlider = null;
     [SerializeField] Slider _dateLoveSlider = null;
     [SerializeField] Slider _datePatienceSlider = null;
@@ -38,6 +39,7 @@ public class CardGameUIController : MonoBehaviour
     void OnEnemyTurnBegan()
     {
         _dateThinkingTextUI.gameObject.SetActive(true);
+        UpdateDateText(_date.Name + " is thinking...");
     }
 
     void OnEnemyTurnEnded()
@@ -74,5 +76,10 @@ public class CardGameUIController : MonoBehaviour
         _datePatienceSlider.minValue = 0;
         _datePatienceSlider.maxValue = _date.StatCap;
         _datePatienceSlider.value = _date.Patience;
+    }
+
+    public void UpdateDateText(string message)
+    {
+        _dateThinkingTextUI.text = message;
     }
 }

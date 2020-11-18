@@ -39,26 +39,26 @@ public class PlayerDeckManager : MonoBehaviour
 
     private void Start()
     {
-        SetupAbilityDeck();
+        SetupDrawDeck();
         //DrawStartingHand();
     }
 
-    private void SetupAbilityDeck()
+    private void SetupDrawDeck()
     {
-        Debug.Log("Creating ConvoCards...");
+        Debug.Log("Player: Creating ConvoCards...");
         foreach (ConvoCardData convoData in _convoDeck.ConvoDeckConfig)
         {
             ConvoCard newConvoCard = new ConvoCard(convoData);
             _drawDeck.Add(newConvoCard);
         }
-        Debug.Log("Creating EnviroCards...");
+        Debug.Log("Player: Creating EnviroCards...");
         foreach (EnviroCardData enviroData in _enviroDeck.EnviroDeckConfig)
         {
             EnviroCard newEnviroCard = new EnviroCard(enviroData);
             _drawDeck.Add(newEnviroCard);
         }
 
-        Debug.Log("Shuffling...");
+        Debug.Log("Player: Shuffling...");
         for(int i = 0; i < _shuffles; i++)
         {
             _drawDeck.Shuffle();
@@ -72,7 +72,7 @@ public class PlayerDeckManager : MonoBehaviour
     {
         if (_drawDeck.Count < _startHandSize)
         {
-            Debug.Log("Shuffling discard into deck...");
+            Debug.Log("Player: Shuffling discard into deck...");
             _drawDeck.Add(_discardDeck.Cards);
             _drawDeck.Shuffle();
             _discardDeck.Clear();
@@ -119,12 +119,12 @@ public class PlayerDeckManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Already drew this turn!");
+                Debug.LogWarning("Player: Already drew this turn!");
             }
         }
         else
         {
-            Debug.LogWarning("Hand size too large, please discard a card!");
+            Debug.LogWarning("Player: Hand size too large, please discard a card!");
         }
     }
 
@@ -166,7 +166,7 @@ public class PlayerDeckManager : MonoBehaviour
         Card newCard = _drawDeck.Draw(DeckPosition.Top);
         if (newCard != null)
         {
-            Debug.Log("Drew card: " + newCard.Name);
+            Debug.Log("Player: Drew card: " + newCard.Name);
             _playerHand.Add(newCard, DeckPosition.Top);
             _currentCardIndex = _playerHand.Count - 1;
             _currentCardView.Display(_playerHand.Cards[_currentCardIndex]);
@@ -175,7 +175,7 @@ public class PlayerDeckManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Shuffling discard into deck...");
+            Debug.Log("Player: Shuffling discard into deck...");
             _drawDeck.Add(_discardDeck.Cards);
             _drawDeck.Shuffle();
             _discardDeck.Clear();
@@ -257,7 +257,7 @@ public class PlayerDeckManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No cards to select between");
+            Debug.LogWarning("Player: No cards to select between");
         }
         UpdateHandSize();
     }
@@ -281,7 +281,7 @@ public class PlayerDeckManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No cards to select between");
+            Debug.LogWarning("Player: No cards to select between");
         }
         UpdateHandSize();
     }
@@ -308,7 +308,7 @@ public class PlayerDeckManager : MonoBehaviour
         _playerHand.Remove(_currentCardIndex);
         _discardDeck.Add(targetCard);
         _discardDeckView.Display(targetCard);
-        Debug.Log("Card added to discard: " + targetCard.Name);
+        Debug.Log("Player: Card added to discard: " + targetCard.Name);
         Debug.Log("Player Hand Count: " + _playerHand.Count);
         if (_playerHand.Count > 0)
         {

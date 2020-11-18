@@ -10,6 +10,7 @@ public class DateTurnCardGameState : CardGameState
 
     [SerializeField] float _pauseDuration = 1.5f;
     [SerializeField] Date _date;
+    [SerializeField] DateDeckManager _dateDeck;
     [SerializeField] PlayerTurnCardGameState _playerTurn = null;
 
     private Coroutine _coroutine;
@@ -19,6 +20,26 @@ public class DateTurnCardGameState : CardGameState
         Debug.Log("Date Turn: Entering...");
         DateTurnBegan?.Invoke();
 
+        //If first turn, draw starting hand
+        if (PlayerTurnCardGameState.PlayerTurnCount == 1)
+        {
+            _dateDeck.DrawStartingHand();
+        }
+
+        //Check for win/loss before turn begins
+        Debug.Log("Checking Win/Loss State");
+        if (CheckWin())
+        {
+            StateMachine.ChangeState<WinCardGameState>();
+            return;
+        }
+        if (CheckLose())
+        {
+            StateMachine.ChangeState<LoseCardGameState>();
+            return;
+        }
+
+        _dateDeck._canDraw = true;
         _coroutine = StartCoroutine(DateThinkingRoutine(_pauseDuration));
     }
 
@@ -29,10 +50,10 @@ public class DateTurnCardGameState : CardGameState
 
     IEnumerator DateThinkingRoutine(float pauseDuration)
     {
-        Debug.Log("Checking Win/Loss State");
         Debug.Log("Date thinking...");
         yield return new WaitForSeconds(pauseDuration);
-        DateRandomAction();
+        _dateDeck.DateTurn();
+        yield return new WaitForSeconds(pauseDuration);
         EndOfDateTurn();
     }
 
@@ -76,6 +97,7 @@ public class DateTurnCardGameState : CardGameState
     private void EndOfDateTurn()
     {
         DateTurnEnded?.Invoke();
+        Debug.Log("Checking Win/Loss State");
         if (CheckWin())
         {
             StateMachine.ChangeState<WinCardGameState>();
@@ -101,12 +123,10 @@ public class DateTurnCardGameState : CardGameState
         {
             Debug.LogWarning("Round over: Turn Limit Passed");
             PlayerTurnCardGameState.ResetTurnCount();
-            //StateMachine.ChangeState<RoundEndCardGameState>();
             return true;
         }
         else
         {
-            //StateMachine.ChangeState<PlayerTurnCardGameState>();
             return false;
         }
     }
@@ -116,7 +136,6 @@ public class DateTurnCardGameState : CardGameState
         if (_date.Love >= _date.StatCap)
         {
             StopCoroutine(_coroutine);
-            //StateMachine.ChangeState<WinCardGameState>();
             return true;
         }
         return false;
