@@ -13,6 +13,8 @@ public class LoseCardGameState : CardGameState
         _gameCanvas.gameObject.SetActive(false);
         _loseCanvas.gameObject.SetActive(true);
         _persistantCG.alpha = 0;
+
+        StateMachine.BGM.PlayWaitingBGM();
     }
 
     public override void Exit()

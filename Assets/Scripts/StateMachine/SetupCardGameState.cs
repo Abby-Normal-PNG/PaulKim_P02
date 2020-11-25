@@ -16,6 +16,8 @@ public class SetupCardGameState : CardGameState
         _gameplayCanvas.gameObject.SetActive(true);
 
         _activated = false;
+
+        StateMachine.BGM.PlayGameplayBGM();
     }
 
     public override void Tick()

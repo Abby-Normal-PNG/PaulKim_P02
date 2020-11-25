@@ -14,6 +14,8 @@ public class WinCardGameState : CardGameState
         _gameCanvas.gameObject.SetActive(false);
         _winCanvas.gameObject.SetActive(true);
         _persistentCG.alpha = 0;
+
+        StateMachine.BGM.PlayVictoryBGM();
     }
 
     public override void Exit()

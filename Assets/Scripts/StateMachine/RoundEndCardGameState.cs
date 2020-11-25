@@ -11,6 +11,8 @@ public class RoundEndCardGameState : CardGameState
     {
         _gameCanvas.gameObject.SetActive(false);
         _roundEndCanvas.gameObject.SetActive(true);
+
+        StateMachine.BGM.PlayWaitingBGM();
     }
 
     public override void Exit()

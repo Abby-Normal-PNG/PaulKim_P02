@@ -13,6 +13,8 @@ public class MenuCardGameState : CardGameState
         _menuCanvas.gameObject.SetActive(true);
         _date.ResetStats();
         _date.ResetMods();
+
+        StateMachine.BGM.PlayMenuBGM();
     }
 
     public override void Exit()
