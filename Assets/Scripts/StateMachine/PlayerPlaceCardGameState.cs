@@ -55,16 +55,7 @@ public class PlayerPlaceCardGameState : CardGameState
     {
         if (_boardCardSpawner != null)
         {
-            SpawnBoardCardCommand spawnBoardCardCommand = new SpawnBoardCardCommand(_boardCardSpawner, _card);
-            BoardCard spawnedBoardCard;
-            spawnedBoardCard = _commandInvoker.ExecuteReturnBoardCard(spawnBoardCardCommand, _card);
-            //Checking to see if board card is properly spawned before continuing turn
-            if(spawnedBoardCard != null)
-            {
-                _card.Play();
-                _playerManager.DiscardCurrentCard();
-                StateMachine.ChangeState<DateTurnCardGameState>();
-            }
+            StartCoroutine(PlaceCardOnBoard(0.5f));
         }
     }
 
@@ -77,5 +68,36 @@ public class PlayerPlaceCardGameState : CardGameState
     public void ClearBoard()
     {
         _commandInvoker.UndoAll();
+    }
+
+    private IEnumerator PlaceCardOnBoard(float duration)
+    {
+        SpawnBoardCardCommand spawnBoardCardCommand = new SpawnBoardCardCommand(_boardCardSpawner, _card);
+        BoardCard spawnedBoardCard;
+        if (spawnBoardCardCommand.CanExecute())
+        {
+            Vector2 newPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 oldPos = new Vector2(_playerManager.CardToPlaceGO.transform.position.x, 
+                _playerManager.CardToPlaceGO.transform.position.x);
+            LeanTween.move(_playerManager.CardToPlaceGO, newPos, duration);
+            LeanTween.scaleX(_playerManager.CardToPlaceGO, 0.75f, duration);
+            LeanTween.scaleY(_playerManager.CardToPlaceGO, 0.75f, duration);
+            yield return new WaitForSeconds(duration);
+            spawnedBoardCard = _commandInvoker.ExecuteReturnBoardCard(spawnBoardCardCommand, _card);
+            if (spawnedBoardCard != null)
+            {
+                _card.Play();
+                _playerManager.DiscardPlayedCard();
+                Destroy(_playerManager.CardToPlaceGO);
+                StateMachine.ChangeState<DateTurnCardGameState>();
+            }
+            else
+            {
+                LeanTween.move(_playerManager.CardToPlaceGO, oldPos, duration);
+                LeanTween.scaleX(_playerManager.CardToPlaceGO, 1f, duration);
+                LeanTween.scaleY(_playerManager.CardToPlaceGO, 1f, duration);
+            }
+        }
+        
     }
 }

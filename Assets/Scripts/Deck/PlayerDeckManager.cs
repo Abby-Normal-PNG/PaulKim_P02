@@ -27,6 +27,9 @@ public class PlayerDeckManager : MonoBehaviour
     [SerializeField] CanvasGroup _drawButtonCG = null;
     [SerializeField] Text _handSizeText = null;
 
+    [SerializeField] CardView _tweenCard = null;
+    private GameObject _tweenCardGO;
+
     [Header("Values")]
     [SerializeField] int _currentCardIndex = 0;
     [SerializeField] int _shuffles = 3;
@@ -36,11 +39,15 @@ public class PlayerDeckManager : MonoBehaviour
 
     private Card _cardToPlace = null;
     public Card CardToPlace => _cardToPlace;
+    private GameObject _cardToPlaceGO = null;
+    public GameObject CardToPlaceGO => _cardToPlaceGO;
+    private CardView _cardToPlaceView = null;
+    public CardView CardToPlaceView => _cardToPlaceView;
 
     private void Start()
     {
         SetupDrawDeck();
-        //DrawStartingHand();
+        _tweenCardGO = _tweenCard.gameObject;
     }
 
     private void SetupDrawDeck()
@@ -152,13 +159,6 @@ public class PlayerDeckManager : MonoBehaviour
         {
             PrintPlayerHand();
         }
-        /*if(_playerHand.Count == 0)
-        {
-            //TODO Shift card display logic to Unity Events
-            _currentCardView.DisplayNull();
-        }*/
-
-        
     }
 
     public void DrawCard()
@@ -169,18 +169,16 @@ public class PlayerDeckManager : MonoBehaviour
             Debug.Log("Player: Drew card: " + newCard.Name);
             _playerHand.Add(newCard, DeckPosition.Top);
             _currentCardIndex = _playerHand.Count - 1;
-            _currentCardView.Display(_playerHand.Cards[_currentCardIndex]);
-            _drawDeckView.Display(_drawDeck);
+            StartCoroutine(DrawCardTween(newCard, 0.25f));
             _canDraw = false;
         }
         else
         {
             Debug.Log("Player: Shuffling discard into deck...");
             _drawDeck.Add(_discardDeck.Cards);
+            StartCoroutine(ReshuffleTween(_discardDeck.TopItem, 0.25f));
             _drawDeck.Shuffle();
             _discardDeck.Clear();
-            _drawDeckView.Display(_drawDeck);
-            _discardDeckView.DisplayNull();
             _canDraw = true;
         }
         CheckPassPlayState();
@@ -201,17 +199,11 @@ public class PlayerDeckManager : MonoBehaviour
         {
             Card targetCard = _playerHand.Cards[_currentCardIndex];
             _cardToPlace = targetCard;
-            
-            /*if(_playerHand.Count > 0)
-            {
-                _currentCardView.Display(_playerHand.TopItem);
-                _currentCardIndex = _playerHand.Count - 1;
-            }
-            else
-            {
-                _currentCardView.DisplayNull();
-                _currentCardIndex = 0;
-            }*/
+            //TODO Set TweenCard position
+            _cardToPlaceGO = Instantiate(_tweenCardGO, _tweenCardGO.transform);
+            _cardToPlaceView = _cardToPlaceGO.GetComponent<CardView>();
+            _cardToPlaceGO.transform.position = _currentCardView.transform.position;
+            _cardToPlaceView.Display(targetCard);
         }
         else
         {
@@ -219,24 +211,6 @@ public class PlayerDeckManager : MonoBehaviour
         }
         UpdateHandSize();
     }
-
-   /* private void PlayTopCard()
-    {
-        if (_playerHand.Count > 0)
-        {
-            Card targetCard = _playerHand.TopItem;
-            targetCard.Play();
-            //TODO Consider expanding Remove to accept a deck position
-            _playerHand.Remove(_playerHand.LastIndex);
-            _discardDeck.Add(targetCard);
-            _discardDeckView.Display(targetCard);
-            Debug.Log("Card added to discard: " + targetCard.Name);
-        }
-        else
-        {
-            Debug.LogWarning("Player Hand: Nothing to play - hand is empty!");
-        }
-    }*/
 
     public void SelectNextCard()
     {
@@ -307,20 +281,18 @@ public class PlayerDeckManager : MonoBehaviour
         Card targetCard = _playerHand.Cards[_currentCardIndex];
         _playerHand.Remove(_currentCardIndex);
         _discardDeck.Add(targetCard);
-        _discardDeckView.Display(targetCard);
-        Debug.Log("Player: Card added to discard: " + targetCard.Name);
-        Debug.Log("Player Hand Count: " + _playerHand.Count);
-        if (_playerHand.Count > 0)
-        {
-            _currentCardView.Display(_playerHand.TopItem);
-            _currentCardIndex = _playerHand.Count - 1;
-        }
-        else
-        {
-            _currentCardView.DisplayNull();
-            _currentCardIndex = 0;
-        }
         UpdateHandSize();
+        UpdateHandVisuals();
+        StartCoroutine(DiscardTween(targetCard, 0.25f));
+    }
+
+    public void DiscardPlayedCard()
+    {
+        Card targetCard = _playerHand.Cards[_currentCardIndex];
+        _playerHand.Remove(_currentCardIndex);
+        _discardDeck.Add(targetCard);
+        UpdateHandSize();
+        UpdateHandVisuals();
     }
 
     private void UpdateHandSize()
@@ -348,5 +320,55 @@ public class PlayerDeckManager : MonoBehaviour
             _currentCardView.DisplayNull();
             _currentCardIndex = 0;
         }
+    }
+
+    private IEnumerator DrawCardTween(Card card, float duration)
+    {
+        GameObject tweenGO = Instantiate(_tweenCardGO, _tweenCardGO.transform);
+        CardView tweenView = tweenGO.GetComponent<CardView>();
+        tweenGO.transform.position = _drawDeckView.transform.position;
+        tweenView.Display(card);
+        LeanTween.move(tweenGO, _currentCardView.transform, duration);
+        yield return new WaitForSeconds(duration);
+        _currentCardView.Display(_playerHand.Cards[_currentCardIndex]);
+        _drawDeckView.Display(_drawDeck);
+        Destroy(tweenGO);
+    }
+
+    private IEnumerator ReshuffleTween(Card card, float duration)
+    {
+        GameObject tweenGO = Instantiate(_tweenCardGO, _tweenCardGO.transform);
+        CardView tweenView = tweenGO.GetComponent<CardView>();
+        tweenGO.transform.position = _discardDeckView.transform.position;
+        tweenView.Display(card);
+        LeanTween.move(tweenGO, _drawDeckView.transform, duration);
+        yield return new WaitForSeconds(duration);
+        _drawDeckView.Display(_drawDeck);
+        _discardDeckView.DisplayNull();
+        Destroy(tweenGO);
+    }
+
+    private IEnumerator DiscardTween(Card card, float duration)
+    {
+        GameObject tweenGO = Instantiate(_tweenCardGO, _tweenCardGO.transform);
+        CardView tweenView = tweenGO.GetComponent<CardView>();
+        tweenGO.transform.position = _currentCardView.transform.position;
+        tweenView.Display(card);
+        LeanTween.move(tweenGO, _discardDeckView.transform, duration);
+        yield return new WaitForSeconds(duration);
+        _discardDeckView.Display(card);
+        Debug.Log("Player: Card added to discard: " + card.Name);
+        Debug.Log("Player Hand Count: " + _playerHand.Count);
+        if (_playerHand.Count > 0)
+        {
+            _currentCardView.Display(_playerHand.TopItem);
+            _currentCardIndex = _playerHand.Count - 1;
+        }
+        else
+        {
+            _currentCardView.DisplayNull();
+            _currentCardIndex = 0;
+        }
+        Destroy(tweenGO);
     }
 }

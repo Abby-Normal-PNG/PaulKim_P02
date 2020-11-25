@@ -30,4 +30,16 @@ public class SpawnBoardCardCommand : ICommand
     {
         _boardCardSpawner.RemoveToken(_spawnedBoardCard);
     }
+
+    public bool CanExecute()
+    {
+        if (_boardCardSpawner.CardTypesMatch(_card.CardType))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
