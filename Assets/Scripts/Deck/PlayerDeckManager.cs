@@ -37,6 +37,13 @@ public class PlayerDeckManager : MonoBehaviour
     [SerializeField] int _handLimit = 7;
     [HideInInspector] public bool _canDraw = false;
 
+    [Header("SoundEffects")]
+    [SerializeField] AudioClip _drawAudio;
+    [SerializeField] AudioClip _shuffleAudio;
+    [SerializeField] AudioClip _playAudio;
+    [SerializeField] AudioClip _discardAudio;
+    [SerializeField] AudioClip _selectAudio;
+
     private Card _cardToPlace = null;
     public Card CardToPlace => _cardToPlace;
     private GameObject _cardToPlaceGO = null;
@@ -66,7 +73,8 @@ public class PlayerDeckManager : MonoBehaviour
         }
 
         Debug.Log("Player: Shuffling...");
-        for(int i = 0; i < _shuffles; i++)
+        AudioHelper.PlayClip2D(_shuffleAudio, 1f);
+        for (int i = 0; i < _shuffles; i++)
         {
             _drawDeck.Shuffle();
         }
@@ -170,6 +178,7 @@ public class PlayerDeckManager : MonoBehaviour
             _playerHand.Add(newCard, DeckPosition.Top);
             _currentCardIndex = _playerHand.Count - 1;
             StartCoroutine(DrawCardTween(newCard, 0.25f));
+            AudioHelper.PlayClip2D(_drawAudio, 1f);
             _canDraw = false;
         }
         else
@@ -177,6 +186,7 @@ public class PlayerDeckManager : MonoBehaviour
             Debug.Log("Player: Shuffling discard into deck...");
             _drawDeck.Add(_discardDeck.Cards);
             StartCoroutine(ReshuffleTween(_discardDeck.TopItem, 0.25f));
+            AudioHelper.PlayClip2D(_shuffleAudio, 1f);
             _drawDeck.Shuffle();
             _discardDeck.Clear();
             _canDraw = true;
@@ -199,11 +209,11 @@ public class PlayerDeckManager : MonoBehaviour
         {
             Card targetCard = _playerHand.Cards[_currentCardIndex];
             _cardToPlace = targetCard;
-            //TODO Set TweenCard position
             _cardToPlaceGO = Instantiate(_tweenCardGO, _tweenCardGO.transform);
             _cardToPlaceView = _cardToPlaceGO.GetComponent<CardView>();
             _cardToPlaceGO.transform.position = _currentCardView.transform.position;
             _cardToPlaceView.Display(targetCard);
+            AudioHelper.PlayClip2D(_playAudio, 1f);
         }
         else
         {
@@ -228,6 +238,7 @@ public class PlayerDeckManager : MonoBehaviour
                 _currentCardIndex = 0;
                 _currentCardView.Display(_playerHand.BottomItem);
             }
+            AudioHelper.PlayClip2D(_selectAudio, 1f);
         }
         else
         {
@@ -252,6 +263,7 @@ public class PlayerDeckManager : MonoBehaviour
                 _currentCardIndex = _playerHand.Count - 1;
                 _currentCardView.Display(_playerHand.TopItem);
             }
+            AudioHelper.PlayClip2D(_selectAudio, 1f);
         }
         else
         {
@@ -283,6 +295,7 @@ public class PlayerDeckManager : MonoBehaviour
         _discardDeck.Add(targetCard);
         UpdateHandSize();
         UpdateHandVisuals();
+        AudioHelper.PlayClip2D(_discardAudio, 1f);
         StartCoroutine(DiscardTween(targetCard, 0.25f));
     }
 

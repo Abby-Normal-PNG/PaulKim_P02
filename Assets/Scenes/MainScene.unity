@@ -5032,6 +5032,11 @@ MonoBehaviour:
   _startHandSize: 3
   _handLimit: 7
   _canDraw: 0
+  _drawAudio: {fileID: 8300000, guid: 19719448f4e4e3d44bb10073480566a9, type: 3}
+  _shuffleAudio: {fileID: 8300000, guid: a0b7b313c401ad74d9f246369c04c1b1, type: 3}
+  _playAudio: {fileID: 8300000, guid: 917ac55d4a74e22459ec4e8133d079dc, type: 3}
+  _discardAudio: {fileID: 8300000, guid: 0c66973e71eae3849816b76d159de990, type: 3}
+  _selectAudio: {fileID: 8300000, guid: 344291c80d426b74688f1ea06efbe2e4, type: 3}
 --- !u!4 &1028232001
 Transform:
   m_ObjectHideFlags: 0
@@ -7524,6 +7529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerManager: {fileID: 1028232000}
   _placeCardCanvas: {fileID: 1164266888}
+  _cardPlaceAudio: {fileID: 8300000, guid: d0eee90331e464841a90b66751694581, type: 3}
 --- !u!1 &1495317714
 GameObject:
   m_ObjectHideFlags: 0

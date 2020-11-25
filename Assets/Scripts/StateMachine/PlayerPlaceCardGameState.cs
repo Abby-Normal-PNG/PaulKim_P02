@@ -6,6 +6,7 @@ public class PlayerPlaceCardGameState : CardGameState
 {
     [SerializeField] PlayerDeckManager _playerManager;
     [SerializeField] Canvas _placeCardCanvas;
+    [SerializeField] AudioClip _cardPlaceAudio;
     private Card _card;
     private BoardCardSpawner _boardCardSpawner = null;
 
@@ -82,6 +83,7 @@ public class PlayerPlaceCardGameState : CardGameState
             LeanTween.move(_playerManager.CardToPlaceGO, newPos, duration);
             LeanTween.scaleX(_playerManager.CardToPlaceGO, 0.75f, duration);
             LeanTween.scaleY(_playerManager.CardToPlaceGO, 0.75f, duration);
+            AudioHelper.PlayClip2D(_cardPlaceAudio, 1f);
             yield return new WaitForSeconds(duration);
             spawnedBoardCard = _commandInvoker.ExecuteReturnBoardCard(spawnBoardCardCommand, _card);
             if (spawnedBoardCard != null)
