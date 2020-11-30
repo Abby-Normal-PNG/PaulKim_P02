@@ -44,10 +44,10 @@ public class DateDeckManager : MonoBehaviour
 
     private void Start()
     {
-        SetupDrawDeck();
+        //SetupDrawDeck();
     }
 
-    private void SetupDrawDeck()
+    public void SetupDrawDeck()
     {
         Debug.Log("Date: Creating ConvoCards...");
         foreach (ConvoCardData convoData in _convoDeck.ConvoDeckConfig)
@@ -311,5 +311,12 @@ public class DateDeckManager : MonoBehaviour
                 _uiController.UpdateDateText(_uiController.Date.Name + " plays " + card.Name);
             }
         }
+    }
+
+    public void ClearDecks()
+    {
+        _drawDeck.Clear();
+        _discardDeck.Clear();
+        _dateHand.Clear();
     }
 }

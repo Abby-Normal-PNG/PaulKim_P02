@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayEffect_MidLoveBonus
   m_EditorClassIdentifier: 
   _type: 1
-  _amount: 3
+  _amount: 6

@@ -14,6 +14,7 @@ public class DateTurnCardGameState : CardGameState
     [SerializeField] PlayerTurnCardGameState _playerTurn = null;
 
     private Coroutine _coroutine;
+    private bool _dateThinking = false;
 
     public override void Enter()
     {
@@ -25,26 +26,36 @@ public class DateTurnCardGameState : CardGameState
         {
             _dateDeck.DrawStartingHand();
         }
+    }
 
-        //Check for win/loss before turn begins
-        Debug.Log("Checking Win/Loss State");
-        if (CheckWin())
+    public override void Tick()
+    {
+        if (!_dateThinking)
         {
-            StateMachine.ChangeState<WinCardGameState>();
-            return;
+            //Check for win/loss before turn begins
+            Debug.Log("Checking Win/Loss State");
+            if (CheckWin())
+            {
+                StateMachine.ChangeState<WinCardGameState>();
+                return;
+            }
+            else if (CheckLose())
+            {
+                StateMachine.ChangeState<LoseCardGameState>();
+                return;
+            }
+            else
+            {
+                _dateDeck._canDraw = true;
+                _dateThinking = true;
+                _coroutine = StartCoroutine(DateThinkingRoutine(_pauseDuration));
+            }
         }
-        if (CheckLose())
-        {
-            StateMachine.ChangeState<LoseCardGameState>();
-            return;
-        }
-
-        _dateDeck._canDraw = true;
-        _coroutine = StartCoroutine(DateThinkingRoutine(_pauseDuration));
     }
 
     public override void Exit()
     {
+        _dateThinking = false;
         Debug.Log("Date Turn: Exiting...");
     }
 

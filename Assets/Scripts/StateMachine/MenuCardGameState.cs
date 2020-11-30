@@ -6,13 +6,12 @@ public class MenuCardGameState : CardGameState
 {
     [SerializeField] Canvas _menuCanvas;
     [SerializeField] CanvasGroup _persistentCG;
-    [SerializeField] Date _date;
+    [SerializeField] SetupCardGameState _setup;
 
     public override void Enter()
     {
         _menuCanvas.gameObject.SetActive(true);
-        _date.ResetStats();
-        _date.ResetMods();
+        _setup._shouldResetDate = true;
 
         StateMachine.BGM.PlayMenuBGM();
     }

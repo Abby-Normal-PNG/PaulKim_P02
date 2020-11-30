@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayEffect_SmallJoyBonus
   m_EditorClassIdentifier: 
   _type: 0
-  _amount: 1
+  _amount: 3

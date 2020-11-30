@@ -7,13 +7,17 @@ public class WinCardGameState : CardGameState
     [SerializeField] Canvas _winCanvas = null;
     [SerializeField] Canvas _gameCanvas = null;
     [SerializeField] CanvasGroup _persistentCG;
+    [SerializeField] BoardManager _board;
+
 
     public override void Enter()
     {
         Debug.Log("Win State: Entering...");
-        _gameCanvas.gameObject.SetActive(false);
+        //_gameCanvas.gameObject.SetActive(false);
         _winCanvas.gameObject.SetActive(true);
         _persistentCG.alpha = 0;
+
+        _board.ClearBoard();
 
         StateMachine.BGM.PlayVictoryBGM();
     }
@@ -25,6 +29,7 @@ public class WinCardGameState : CardGameState
 
     public void ReturnToMenu()
     {
+        PlayerTurnCardGameState._playerTurnCount = 0;
         StateMachine.ChangeState<MenuCardGameState>();
     }
 }

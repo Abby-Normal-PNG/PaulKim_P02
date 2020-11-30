@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de9e0ada40881c4793caf95857f8c5e, type: 3}
   m_Name: Convo_SadStory
   m_EditorClassIdentifier: 
-  _name: Share a Sad Story
-  _graphic: {fileID: 21300000, guid: c9ee1dbef2f7bbd408d1c1b3b5944fa3, type: 3}
+  _name: Sob Story
+  _graphic: {fileID: 21300000, guid: 6611d5f9be031874d91a58d855f2f6a1, type: 3}
   _color: {r: 0.8235294, g: 0.58431375, b: 0.8392157, a: 1}
   _playEffect: {fileID: 11400000, guid: 5f5f5a65d28af674898dcb9d51134290, type: 2}
-  _description: Raise Love by 15, but lose 10 Joy and Patience
-  _cardTexture: {fileID: 2800000, guid: d40cfdede38d71a4ca3e1f10c6daa914, type: 3}
+  _description: '+10 Love
+
+    -12 Joy
+
+    -6 Patience'
+  _cardTexture: {fileID: 2800000, guid: 505f79933cd7915489a1d19c0b9becab, type: 3}

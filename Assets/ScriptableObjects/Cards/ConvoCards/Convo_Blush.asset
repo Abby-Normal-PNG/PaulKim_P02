@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Convo_Blush
   m_EditorClassIdentifier: 
   _name: Blush
-  _graphic: {fileID: 21300000, guid: d9a144c32c90b8a43b6f5e34e10f215d, type: 3}
+  _graphic: {fileID: 21300000, guid: 1eb65f4ed87484b428ded1af50bbbe4f, type: 3}
   _color: {r: 0.8235294, g: 0.58431375, b: 0.8392157, a: 1}
-  _playEffect: {fileID: 11400000, guid: cf05d887c0acd304ca3831e02a4c0112, type: 2}
-  _description: Raise 5 Joy
-  _cardTexture: {fileID: 2800000, guid: d40cfdede38d71a4ca3e1f10c6daa914, type: 3}
+  _playEffect: {fileID: 11400000, guid: e0923ca8648f9294b8c149082280d10a, type: 2}
+  _description: '+3 Love
+
+    +3 Joy
+
+    -6 Patience'
+  _cardTexture: {fileID: 2800000, guid: de8cc633c48bede4fbcb277e6d2ebb1b, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayEffect_SmallLoveBonus
   m_EditorClassIdentifier: 
   _type: 1
-  _amount: 1
+  _amount: 3

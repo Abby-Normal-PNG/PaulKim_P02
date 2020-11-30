@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Convo_Listen
   m_EditorClassIdentifier: 
   _name: Listen
-  _graphic: {fileID: 21300000, guid: 1ea6875c7439b8f4d87380f4501aac0d, type: 3}
+  _graphic: {fileID: 21300000, guid: 90b6d62b40af0be43bad9d17b9f7b8cc, type: 3}
   _color: {r: 0.8235294, g: 0.58431375, b: 0.8392157, a: 1}
   _playEffect: {fileID: 11400000, guid: 72956fad69d1a7e49af56979d5e72395, type: 2}
-  _description: Raise 5 Patience and 5 Love
-  _cardTexture: {fileID: 2800000, guid: d40cfdede38d71a4ca3e1f10c6daa914, type: 3}
+  _description: +16 Patience
+  _cardTexture: {fileID: 2800000, guid: 6daea85c2f9d0d840b649decab31c376, type: 3}

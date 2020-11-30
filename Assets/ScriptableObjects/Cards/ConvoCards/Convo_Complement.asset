@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Convo_Complement
   m_EditorClassIdentifier: 
   _name: Complement
-  _graphic: {fileID: 21300000, guid: e727789b830380c498841582fee275c3, type: 3}
+  _graphic: {fileID: 21300000, guid: 02ddc27d22345a14cb28f9839810eac2, type: 3}
   _color: {r: 0.82352585, g: 0.58298326, b: 0.8396226, a: 1}
   _playEffect: {fileID: 11400000, guid: c93ae673bdf78224ba7079786d818fb5, type: 2}
-  _description: Increase Love and Joy by 5
-  _cardTexture: {fileID: 2800000, guid: d40cfdede38d71a4ca3e1f10c6daa914, type: 3}
+  _description: '+6 Joy
+
+    +6 Patience'
+  _cardTexture: {fileID: 2800000, guid: f115ff992f180b743bcf8e121f39f8fa, type: 3}

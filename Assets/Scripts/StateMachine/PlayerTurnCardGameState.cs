@@ -9,20 +9,22 @@ public class PlayerTurnCardGameState : CardGameState
     [SerializeField] Text _playerTurnTextUI = null;
     [SerializeField] PlayerDeckManager _playerDeck = null;
     [SerializeField] CanvasGroup _turnCanvas = null;
+    [SerializeField] TweenThis _playerTurnTextTween = null;
     [SerializeField] BoardManager _board = null;
     [SerializeField] Date _date = null;
 
     [SerializeField] int _turnsPerRound = 5;
     public int TurnsPerRound => _turnsPerRound;
 
-    static int _playerTurnCount = 0;
+    public static int _playerTurnCount = 0;
     public static int PlayerTurnCount => _playerTurnCount;
 
     public override void Enter()
     {
         Debug.Log("Player Turn: Entering...");
         _playerTurnTextUI.gameObject.SetActive(true);
-        _turnCanvas.alpha = 1;
+        _playerTurnTextTween.PopIn() ;
+        _turnCanvas.gameObject.SetActive(true);
         _turnCanvas.blocksRaycasts = true;
         _turnCanvas.interactable = true;
 
@@ -50,7 +52,8 @@ public class PlayerTurnCardGameState : CardGameState
     public override void Exit()
     {
         _playerTurnTextUI.gameObject.SetActive(false);
-        _turnCanvas.alpha = 0;
+        _playerTurnTextTween.PopOut();
+        _turnCanvas.gameObject.SetActive(false);
         _turnCanvas.blocksRaycasts = false;
         _turnCanvas.interactable = false;
         //unhook events
@@ -72,5 +75,11 @@ public class PlayerTurnCardGameState : CardGameState
     public static void ResetTurnCount()
     {
         _playerTurnCount = 0;
+    }
+
+    public void ReturnToMenu()
+    {
+        PlayerTurnCardGameState._playerTurnCount = 0;
+        StateMachine.ChangeState<MenuCardGameState>();
     }
 }

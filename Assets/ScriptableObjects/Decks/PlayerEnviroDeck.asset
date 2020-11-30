@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b525c6d5fb1dd4b8a457ce0b523405, type: 3}
+  m_Name: PlayerEnviroDeck
+  m_EditorClassIdentifier: 
+  _enviroDeckConfig:
+  - {fileID: 11400000, guid: c5c3927f025ce524e8d42b2e5e6d5f61, type: 2}
+  - {fileID: 11400000, guid: c5c3927f025ce524e8d42b2e5e6d5f61, type: 2}
+  - {fileID: 11400000, guid: 05dd89798ad930148b1f158c4cbb3ca7, type: 2}
+  - {fileID: 11400000, guid: 05dd89798ad930148b1f158c4cbb3ca7, type: 2}
+  - {fileID: 11400000, guid: fad4d960b209fe9479d8769756e804e1, type: 2}
+  - {fileID: 11400000, guid: fad4d960b209fe9479d8769756e804e1, type: 2}

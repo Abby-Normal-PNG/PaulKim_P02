@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayEffect_MidJoyBonus
   m_EditorClassIdentifier: 
   _type: 0
-  _amount: 3
+  _amount: 6

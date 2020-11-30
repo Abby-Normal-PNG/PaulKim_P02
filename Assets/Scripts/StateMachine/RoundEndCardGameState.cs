@@ -22,6 +22,7 @@ public class RoundEndCardGameState : CardGameState
 
     public void StartNextRound()
     {
+        PlayerTurnCardGameState._playerTurnCount = 0;
         StateMachine.ChangeState<SetupCardGameState>();
     }
 }

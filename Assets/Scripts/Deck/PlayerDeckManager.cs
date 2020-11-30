@@ -53,11 +53,11 @@ public class PlayerDeckManager : MonoBehaviour
 
     private void Start()
     {
-        SetupDrawDeck();
+        //SetupDrawDeck();
         _tweenCardGO = _tweenCard.gameObject;
     }
 
-    private void SetupDrawDeck()
+    public void SetupDrawDeck()
     {
         Debug.Log("Player: Creating ConvoCards...");
         foreach (ConvoCardData convoData in _convoDeck.ConvoDeckConfig)
@@ -310,7 +310,7 @@ public class PlayerDeckManager : MonoBehaviour
 
     private void UpdateHandSize()
     {
-        _handSizeText.text = _playerHand.Count.ToString() + "/" + _handLimit.ToString();
+        _handSizeText.text = (_currentCardIndex+1).ToString() + "/" + _playerHand.Count.ToString();
         if(_playerHand.Count >= _handLimit)
         {
             _handSizeText.color = Color.red;
@@ -383,5 +383,12 @@ public class PlayerDeckManager : MonoBehaviour
             _currentCardIndex = 0;
         }
         Destroy(tweenGO);
+    }
+
+    public void ClearDecks()
+    {
+        _drawDeck.Clear();
+        _discardDeck.Clear();
+        _playerHand.Clear();
     }
 }

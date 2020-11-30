@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CardGameUIController : MonoBehaviour
 {
     [SerializeField] Text _dateThinkingTextUI = null;
+    [SerializeField] TweenThis _dateThinkingTextTween;
     [SerializeField] Date _date = null;
     public Date Date => _date;
     [SerializeField] Slider _dateJoySlider = null;
@@ -34,30 +35,34 @@ public class CardGameUIController : MonoBehaviour
     {
         _dateThinkingTextUI.gameObject.SetActive(false);
         PrepareSliders();
+        UpdateJoySlider();
+        UpdateLoveSlider();
+        UpdatePatienceSlider();
     }
 
     void OnEnemyTurnBegan()
     {
         _dateThinkingTextUI.gameObject.SetActive(true);
+        _dateThinkingTextTween.PopIn();
         UpdateDateText(_date.Name + " is thinking...");
     }
 
-    void OnEnemyTurnEnded()
+    public void OnEnemyTurnEnded()
     {
-        _dateThinkingTextUI.gameObject.SetActive(false);
+        _dateThinkingTextTween.PopOut();
     }
 
-    void UpdateJoySlider()
+    public void UpdateJoySlider()
     {
         _dateJoySlider.value = _date.Joy;
     }
 
-    void UpdateLoveSlider()
+    public void UpdateLoveSlider()
     {
         _dateLoveSlider.value = _date.Love;
     }
 
-    void UpdatePatienceSlider()
+    public void UpdatePatienceSlider()
     {
         _datePatienceSlider.value = _date.Patience;
     }
@@ -81,5 +86,6 @@ public class CardGameUIController : MonoBehaviour
     public void UpdateDateText(string message)
     {
         _dateThinkingTextUI.text = message;
+        StartCoroutine(_dateThinkingTextTween.BeatBump());
     }
 }
