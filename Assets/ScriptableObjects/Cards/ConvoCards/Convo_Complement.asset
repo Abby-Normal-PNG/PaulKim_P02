@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de9e0ada40881c4793caf95857f8c5e, type: 3}
   m_Name: Convo_Complement
   m_EditorClassIdentifier: 
-  _name: Complement
+  _name: Compliment
   _graphic: {fileID: 21300000, guid: 02ddc27d22345a14cb28f9839810eac2, type: 3}
   _color: {r: 0.82352585, g: 0.58298326, b: 0.8396226, a: 1}
   _playEffect: {fileID: 11400000, guid: c93ae673bdf78224ba7079786d818fb5, type: 2}

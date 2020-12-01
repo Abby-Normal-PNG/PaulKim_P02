@@ -63,6 +63,7 @@ public class PlayerPlaceCardGameState : CardGameState
     public void AbandonCard()
     {
         _playerManager.DiscardCurrentCard();
+        Destroy(_playerManager.CardToPlaceGO);
         StateMachine.ChangeState<DateTurnCardGameState>();
     }
 

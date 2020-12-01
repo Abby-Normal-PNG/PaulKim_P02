@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enviroDeckConfig:
   - {fileID: 11400000, guid: c5c3927f025ce524e8d42b2e5e6d5f61, type: 2}
-  - {fileID: 11400000, guid: c5c3927f025ce524e8d42b2e5e6d5f61, type: 2}
-  - {fileID: 11400000, guid: 05dd89798ad930148b1f158c4cbb3ca7, type: 2}
   - {fileID: 11400000, guid: 05dd89798ad930148b1f158c4cbb3ca7, type: 2}
   - {fileID: 11400000, guid: fad4d960b209fe9479d8769756e804e1, type: 2}
+  - {fileID: 11400000, guid: c5c3927f025ce524e8d42b2e5e6d5f61, type: 2}
+  - {fileID: 11400000, guid: 05dd89798ad930148b1f158c4cbb3ca7, type: 2}
+  - {fileID: 11400000, guid: fad4d960b209fe9479d8769756e804e1, type: 2}
+  - {fileID: 11400000, guid: c5c3927f025ce524e8d42b2e5e6d5f61, type: 2}
+  - {fileID: 11400000, guid: 05dd89798ad930148b1f158c4cbb3ca7, type: 2}
+  - {fileID: 11400000, guid: fad4d960b209fe9479d8769756e804e1, type: 2}
+  - {fileID: 11400000, guid: c5c3927f025ce524e8d42b2e5e6d5f61, type: 2}
+  - {fileID: 11400000, guid: 05dd89798ad930148b1f158c4cbb3ca7, type: 2}
   - {fileID: 11400000, guid: fad4d960b209fe9479d8769756e804e1, type: 2}
