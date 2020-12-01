@@ -7,7 +7,7 @@ public static class SaveSystem
     public static void SaveRecords(PlayerRecords records)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.rec";
+        string path = Application.persistentDataPath + "/player.txt";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(records);
@@ -18,7 +18,7 @@ public static class SaveSystem
 
     public static PlayerData LoadRecords()
     {
-        string path = Application.persistentDataPath + "/player.rec";
+        string path = Application.persistentDataPath + "/player.txt";
 
         if (File.Exists(path))
         {
@@ -32,7 +32,6 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("Save File not found in " + path);
             return null;
         }
     }
