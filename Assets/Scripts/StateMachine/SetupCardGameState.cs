@@ -10,6 +10,7 @@ public class SetupCardGameState : CardGameState
     [SerializeField] DateDeckManager _dateDeck;
     [SerializeField] CardGameUIController _ui;
     [SerializeField] Date _date;
+    [SerializeField] PlayerRecords _records;
 
     bool _activated = false;
     public bool _shouldResetDate = false;
@@ -39,6 +40,8 @@ public class SetupCardGameState : CardGameState
         _ui.UpdatePatienceSlider();
         _ui.OnEnemyTurnEnded();
         _playerDeck.UpdateHandVisuals();
+
+        _records.StartDate();
 
         _activated = false;
     }

@@ -8,6 +8,7 @@ public class LoseCardGameState : CardGameState
     [SerializeField] Canvas _gameCanvas = null;
     [SerializeField] CanvasGroup _persistantCG = null;
     [SerializeField] BoardManager _board;
+    [SerializeField] PlayerRecords _records;
 
     public override void Enter()
     {
@@ -16,6 +17,8 @@ public class LoseCardGameState : CardGameState
         _persistantCG.alpha = 0;
 
         _board.ClearBoard();
+
+        _records.Lose();
 
         StateMachine.BGM.PlayWaitingBGM();
     }

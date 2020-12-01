@@ -6,11 +6,14 @@ public class RoundEndCardGameState : CardGameState
 {
     [SerializeField] Canvas _roundEndCanvas = null;
     [SerializeField] Canvas _gameCanvas = null;
+    [SerializeField] PlayerRecords _records;
 
     public override void Enter()
     {
         _gameCanvas.gameObject.SetActive(false);
         _roundEndCanvas.gameObject.SetActive(true);
+
+        _records.EndDate();
 
         StateMachine.BGM.PlayWaitingBGM();
     }
